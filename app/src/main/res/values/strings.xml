@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ExamApp</string>
+    <string-array name="eliminations">
+        <item>Yok</item>
+        <item>1 Yanlış</item>
+        <item>2 Yanlış</item>
+        <item>3 Yanlış</item>
+        <item>4 Yanlış</item>
+    </string-array>
 </resources>

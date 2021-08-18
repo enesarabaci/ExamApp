@@ -1,5 +1,7 @@
 package com.example.examapp.Repo
 
+import com.example.examapp.Model.Exam
+import com.example.examapp.Model.Lecture
 import com.example.examapp.Model.Relations.ExamWithLectures
 import com.example.examapp.Room.Dao
 import kotlinx.coroutines.flow.Flow
@@ -10,5 +12,9 @@ class Repository @Inject constructor(
 ) : RepositoryInterface {
 
     override fun getAllExams(): Flow<List<ExamWithLectures>> = dao.getAllExams()
+
+    override suspend fun insertExamWithLectures(exam: Exam, lectures: List<Lecture>) {
+        dao.insertExamWithLectures(exam, lectures)
+    }
 
 }

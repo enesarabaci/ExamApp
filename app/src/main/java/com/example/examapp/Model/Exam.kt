@@ -8,5 +8,5 @@ data class Exam(
     @PrimaryKey(autoGenerate = false)
     val examName: String,
     val duration: Long,
-    val elimination: Float = 0.25f
+    val elimination: Float
 )

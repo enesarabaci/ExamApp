@@ -1,11 +1,11 @@
 package com.example.examapp.View
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
-import androidx.navigation.findNavController
+import androidx.core.view.isVisible
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.examapp.R
 import com.example.examapp.databinding.ActivityMainBinding
@@ -15,21 +15,38 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        findNavController(R.id.nav_graph).addOnDestinationChangedListener { controller, destination, arguments ->
-            // ** Hide nav operation ** //
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.findNavController()
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when(destination.id) {
+                R.id.createExamFragment -> visibleBottomNav(false)
+                else -> visibleBottomNav(true)
+            }
         }
 
         binding.bottomNavView.apply {
             background = null
             menu.getItem(2).isEnabled = false
-            setupWithNavController(findNavController(R.id.fragmentContainerView))
+            setupWithNavController(navController)
         }
+    }
+
+    private fun visibleBottomNav(visible: Boolean) {
+        binding.apply {
+            bottomAppBar.isVisible = visible
+            bottomFab.isVisible = visible
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
 }

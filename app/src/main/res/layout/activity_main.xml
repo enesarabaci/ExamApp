@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_grey"
     tools:context=".View.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -12,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?actionBarSize"
-        android:background="@color/light_grey"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
@@ -21,8 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/teal_700"
-        app:fabCradleMargin="10dp">
+        android:background="@color/dark"
+        android:visibility="invisible"
+        app:backgroundTint="@color/dark"
+        app:fabCradleMargin="5dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
@@ -30,7 +32,6 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
-            android:visibility="visible"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
             app:menu="@menu/bottom_nav_menu" />
@@ -38,8 +39,13 @@
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bottomFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottomAppBar" />
+        android:src="@drawable/start_exam"
+        android:visibility="invisible"
+        app:backgroundTint="@color/dark"
+        app:layout_anchor="@id/bottomAppBar"
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

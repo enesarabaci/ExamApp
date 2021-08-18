@@ -8,8 +8,8 @@ import com.example.examapp.Model.LectureResult
 data class ExamResultWithLectureResults(
     @Embedded val examResult: ExamResult,
     @Relation(
-        entityColumn = "id",
-        parentColumn = "examResultId"
+        parentColumn = "id",
+        entityColumn = "examResultId"
     )
     val lectureResults: List<LectureResult>
 )

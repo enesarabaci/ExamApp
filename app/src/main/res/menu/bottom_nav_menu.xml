@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/mainFragment"
-        android:icon="@drawable/ic_baseline_add_24"
+        android:icon="@drawable/home"
         android:title="Ana Sayfa" />
     <item
         android:id="@+id/examsFragment"
-        android:icon="@drawable/ic_baseline_add_24"
+        android:icon="@drawable/exams"
         android:title="Sınavlar" />
     <item
         android:id="@+id/placeHolder"
         android:title="" />
     <item
         android:id="@+id/resultsFragment"
-        android:icon="@drawable/ic_baseline_add_24"
+        android:icon="@drawable/results"
         android:title="Sonuçlar" />
     <item
         android:id="@+id/statisticsFragment"
-        android:icon="@drawable/ic_baseline_add_24"
+        android:icon="@drawable/statistics"
         android:title="İstatistikler" />
 
 </menu>

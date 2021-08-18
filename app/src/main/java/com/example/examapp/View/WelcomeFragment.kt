@@ -50,6 +50,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
     }
 
     private fun navigateToMainFragment() {
+        /*
         val navOptions = NavOptions.Builder()
             .setPopUpTo(R.id.welcomeFragment, true)
             .build()
@@ -58,6 +59,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
             null,
             navOptions
         )
+        */
     }
 
 }

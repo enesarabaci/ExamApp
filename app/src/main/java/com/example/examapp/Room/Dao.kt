@@ -14,14 +14,16 @@ interface Dao {
 
     suspend fun insertExamWithLectures(exam: Exam, lectures: List<Lecture>) {
         insertExam(exam)
-        insertLectures(lectures)
+        lectures.forEach {
+            insertLecture(it)
+        }
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExam(exam: Exam)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLectures(lectures: List<Lecture>)
+    suspend fun insertLecture(lecture: Lecture)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExamResult(examResult: ExamResult) : Long

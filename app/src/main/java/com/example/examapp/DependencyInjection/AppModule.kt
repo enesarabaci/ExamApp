@@ -5,6 +5,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.examapp.Repo.Repository
+import com.example.examapp.Repo.RepositoryInterface
+import com.example.examapp.Room.Dao
 import com.example.examapp.Room.ExamDatabase
 import dagger.Module
 import dagger.Provides
@@ -29,5 +32,9 @@ object AppModule {
     @Singleton
     @Provides
     fun getDao(examDatabase: ExamDatabase) = examDatabase.dao()
+
+    @Singleton
+    @Provides
+    fun getRepository(dao: Dao) : RepositoryInterface = Repository(dao)
 
 }
