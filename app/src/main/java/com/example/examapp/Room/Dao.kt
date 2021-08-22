@@ -19,6 +19,13 @@ interface Dao {
         }
     }
 
+    suspend fun insertExamResultWithLectureResults(examResult: ExamResult, lectureResults: List<LectureResult>) {
+        insertExamResult(examResult)
+        lectureResults.forEach {
+            insertLectureResult(it)
+        }
+    }
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExam(exam: Exam)
 
@@ -29,10 +36,16 @@ interface Dao {
     suspend fun insertExamResult(examResult: ExamResult) : Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLectureResults(lectureResults: List<LectureResult>)
+    suspend fun insertLectureResult(lectureResult: LectureResult)
 
     @Query("SELECT * FROM examTable WHERE examName = :examName")
-    fun getExam(examName: String): Flow<List<ExamWithLectures>>
+    suspend fun getExam(examName: String): List<Exam>
+
+    @Query("SELECT * FROM examTable WHERE examName = :examName")
+    fun getExamWithLectures(examName: String): Flow<List<ExamWithLectures>>
+
+    @Query("SELECT * FROM examTable")
+    suspend fun getAllExamWithLectures(): List<ExamWithLectures>
 
     @Query("SELECT * FROM examTable")
     fun getAllExams(): Flow<List<ExamWithLectures>>

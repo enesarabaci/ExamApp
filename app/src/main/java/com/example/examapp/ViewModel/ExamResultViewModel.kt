@@ -1,0 +1,60 @@
+package com.example.examapp.ViewModel
+
+import android.view.View
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.examapp.Model.ExamResult
+import com.example.examapp.Model.LectureResult
+import com.example.examapp.Model.Relations.ExamWithLectures
+import com.example.examapp.Repo.RepositoryInterface
+import com.example.examapp.Util.Util.snackbarBuilder
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class ExamResultViewModel @Inject constructor(
+    private val repo: RepositoryInterface
+) : ViewModel() {
+
+    val trueResultsMap = hashMapOf<String, Int>()
+    val falseResultsMap = hashMapOf<String, Int>()
+    var examWithLectures: ExamWithLectures? = null
+
+    fun saveExamResult(view: View): Boolean {
+        examWithLectures?.let {
+            if (trueResultsMap.size < it.lectures.size || falseResultsMap.size < it.lectures.size) {
+                snackbarBuilder(view, "Lütfen bütün alanları nümerik olarak doldurunuz")
+                return false
+            } else if (trueResultsMap.size == it.lectures.size && falseResultsMap.size == it.lectures.size) {
+                val examResult = ExamResult(it.exam.examName, it.exam.elimination, System.currentTimeMillis())
+                val lectureResults = arrayListOf<LectureResult>()
+                it.lectures.forEach {
+                    val lectureQuestions = it.question
+                    val resultQuestions = (trueResultsMap.get(it.name) ?: 0) + (falseResultsMap.get(it.name) ?: 0)
+                    if(resultQuestions > lectureQuestions) {
+                        snackbarBuilder(view, "${it.name} dersi için girilen sonuçlar soru sayısından fazla")
+                        return false
+                    }
+                    lectureResults.add(
+                        LectureResult(
+                            examResult.date,
+                            it.name,
+                            it.question,
+                            trueResultsMap.get(it.name) ?: 0,
+                            falseResultsMap.get(it.name) ?: 0
+                        )
+                    )
+                }
+                viewModelScope.launch(Dispatchers.IO) {
+                    repo.insertExamResultWithLectureResults(examResult, lectureResults.toList())
+                }
+                return true
+            } else {
+                return false
+            }
+        } ?: return false
+    }
+
+}

@@ -81,4 +81,7 @@ dependencies {
     //Lottie
     implementation "com.airbnb.android:lottie:3.4.0"
 
+    //LifecycleService
+    implementation "androidx.lifecycle:lifecycle-service:2.3.1"
+
 }

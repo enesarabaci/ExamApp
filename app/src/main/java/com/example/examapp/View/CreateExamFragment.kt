@@ -11,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,12 +39,12 @@ class CreateExamFragment : Fragment(R.layout.fragment_create_exam) {
     private lateinit var binding: FragmentCreateExamBinding
     private val viewModel: CreateExamViewModel by viewModels()
     private val recyclerAdapter = CreateExamLectureAdapter()
-    private var selectedTime = 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentCreateExamBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
+        binding.fragmentCreateExamPb.isVisible = false
         (activity as AppCompatActivity).apply {
             setSupportActionBar(binding.fragmentCreateExamToolbar)
             setupActionBarWithNavController(findNavController())
@@ -53,10 +54,13 @@ class CreateExamFragment : Fragment(R.layout.fragment_create_exam) {
 
         collectData()
         setupRv()
-        binding.fragmentCreateExamTime.setOnClickListener { timeClick() }
-        binding.fragmentCreateExamAddLecture.setOnClickListener { addLecture() }
-        binding.fragmentCreateExamName.doOnTextChanged { text, start, before, count ->
-            viewModel.examName = text.toString()
+        binding.apply {
+            fragmentCreateExamTime.setOnClickListener { timeClick() }
+            fragmentCreateExamAddLecture.setOnClickListener { addLecture() }
+            fragmentCreateExamName.doOnTextChanged { text, start, before, count ->
+                viewModel.examName = text.toString()
+            }
+            fragmentCreateExamTime.setText(viewModel.getTimeString())
         }
     }
 
@@ -69,6 +73,12 @@ class CreateExamFragment : Fragment(R.layout.fragment_create_exam) {
         viewModel.createdLectures.observe(viewLifecycleOwner) {
             recyclerAdapter.list = it.toList()
             binding.fragmentCreateExamRv.setHasFixedSize(true)
+        }
+        viewModel.finish.observe(viewLifecycleOwner) {
+            if (it) {
+                val navOptions = NavOptions.Builder().setPopUpTo(R.id.examsFragment, true).build()
+                findNavController().navigate(CreateExamFragmentDirections.actionCreateExamFragmentToExamsFragment(), navOptions)
+            }
         }
     }
 
@@ -102,14 +112,9 @@ class CreateExamFragment : Fragment(R.layout.fragment_create_exam) {
             alertDialogBuilder(
                 requireContext(),
                 "Emin misin?",
-                "Sınavı kaydetmek istediğine emin misin?"
-            ) {
-                val result = viewModel.saveExam(requireView())
-                if (result) {
-                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.examsFragment, true).build()
-                    findNavController().navigate(CreateExamFragmentDirections.actionCreateExamFragmentToExamsFragment(), navOptions)
-                }
-            }
+                "Sınavı kaydetmek istediğine emin misin?",
+                { viewModel.saveExam(requireView()) }
+            )
         }
         return super.onOptionsItemSelected(item)
     }
@@ -122,7 +127,7 @@ class CreateExamFragment : Fragment(R.layout.fragment_create_exam) {
             }
         }
         val style = AlertDialog.THEME_HOLO_DARK
-        val map = makeTime(selectedTime)
+        val map = makeTime(viewModel.selectedTime)
         val timePickerDialog = TimePickerDialog(requireContext(), style, timeSetListener, map.get("hours") ?: 0, map.get("minutes") ?: 0, true)
         timePickerDialog.apply {
             setTitle("Sınav Süresi")

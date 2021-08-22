@@ -8,7 +8,13 @@
     <fragment
         android:id="@+id/examFragment"
         android:name="com.example.examapp.View.ExamFragment"
-        android:label="ExamFragment" />
+        android:label="ExamFragment" >
+        <action
+            android:id="@+id/action_examFragment_to_examResultFragment"
+            app:destination="@id/examResultFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.examapp.View.MainFragment"
@@ -27,7 +33,9 @@
         android:label="ExamsFragment">
         <action
             android:id="@+id/action_examsFragment_to_createExamFragment"
-            app:destination="@id/createExamFragment" />
+            app:destination="@id/createExamFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/createExamFragment"
@@ -35,6 +43,25 @@
         android:label="CreateExamFragment" >
         <action
             android:id="@+id/action_createExamFragment_to_examsFragment"
-            app:destination="@id/examsFragment" />
+            app:destination="@id/examsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_examFragment"
+        app:destination="@id/examFragment"
+        app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/examResultFragment"
+        android:name="com.example.examapp.View.ExamResultFragment"
+        android:label="ExamResultFragment" >
+        <argument
+            android:name="examWithLectures"
+            app:argType="com.example.examapp.Model.Relations.ExamWithLectures" />
+        <action
+            android:id="@+id/action_examResultFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
     </fragment>
 </navigation>

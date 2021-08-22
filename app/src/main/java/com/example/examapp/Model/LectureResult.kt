@@ -5,11 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "lectureResultTable")
 data class LectureResult(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val examResultId: Int,
+    val examResultDate: Long,
     val name: String,
     val question: Int,
     val trues: Int,
-    val falses: Int
+    val falses: Int,
+    @PrimaryKey(autoGenerate = false)
+    val id: String = "$name$examResultDate"
 )

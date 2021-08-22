@@ -10,8 +10,9 @@
         android:icon="@drawable/exams"
         android:title="Sınavlar" />
     <item
-        android:id="@+id/placeHolder"
-        android:title="" />
+        android:id="@+id/examFragment"
+        android:icon="@drawable/start_exam"
+        android:title="Sınava Gir" />
     <item
         android:id="@+id/resultsFragment"
         android:icon="@drawable/results"

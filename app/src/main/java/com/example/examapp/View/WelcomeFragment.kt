@@ -32,6 +32,7 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
     }
 
     private fun checkUser() {
+        /*
         lifecycleScope.launch {
             val userName = Util.getUserName(requireContext())
             userName?.let {
@@ -40,13 +41,16 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
                 binding.loginLayout.visibility = View.VISIBLE
             }
         }
+        */
     }
 
     private fun saveUser(userName: String) {
+        /*
         lifecycleScope.launch {
             Util.writeUserName(requireContext(), userName)
             navigateToMainFragment()
         }
+        */
     }
 
     private fun navigateToMainFragment() {

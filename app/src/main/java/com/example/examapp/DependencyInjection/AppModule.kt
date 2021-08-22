@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.examapp.Adapter.ExamsAdapter
 import com.example.examapp.Repo.Repository
 import com.example.examapp.Repo.RepositoryInterface
 import com.example.examapp.Room.Dao
@@ -35,6 +36,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun getRepository(dao: Dao) : RepositoryInterface = Repository(dao)
+    fun getRepository(dao: Dao): RepositoryInterface = Repository(dao)
+
+    @Singleton
+    @Provides
+    fun getExamsAdapter(@ApplicationContext context: Context) = ExamsAdapter(context)
 
 }

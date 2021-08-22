@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.example.examapp.Model.Exam
 import com.example.examapp.Model.Lecture
+import java.io.Serializable
 
 class ExamWithLectures(
     @Embedded val exam: Exam,
@@ -12,4 +13,4 @@ class ExamWithLectures(
         entityColumn = "examName"
     )
     val lectures: List<Lecture>
-)
+) : Serializable

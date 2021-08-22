@@ -7,4 +7,11 @@
         <item>3 Yanlış</item>
         <item>4 Yanlış</item>
     </string-array>
+    <string-array name="eliminations2">
+        <item>Yok</item>
+        <item>1/1</item>
+        <item>1/2</item>
+        <item>1/3</item>
+        <item>1/4</item>
+    </string-array>
 </resources>

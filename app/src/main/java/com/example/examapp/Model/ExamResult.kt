@@ -5,9 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "examResultTable")
 data class ExamResult(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
     val examName: String,
-    val elimination: Float = 0.25f,
+    val elimination: Int,
+    @PrimaryKey(autoGenerate = false)
     val date: Long
 )
