@@ -4,6 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 import com.example.examapp.Model.ExamResult
 import com.example.examapp.Model.LectureResult
+import java.io.Serializable
 
 data class ExamResultWithLectureResults(
     @Embedded val examResult: ExamResult,
@@ -12,4 +13,4 @@ data class ExamResultWithLectureResults(
         entityColumn = "examResultDate"
     )
     val lectureResults: List<LectureResult>
-)
+) : Serializable

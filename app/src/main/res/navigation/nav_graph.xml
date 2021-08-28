@@ -22,7 +22,13 @@
     <fragment
         android:id="@+id/resultsFragment"
         android:name="com.example.examapp.View.ResultsFragment"
-        android:label="ResultsFragment" />
+        android:label="ResultsFragment" >
+        <action
+            android:id="@+id/action_resultsFragment_to_examResultDetailFragment"
+            app:destination="@id/examResultDetailFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+    </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.example.examapp.View.StatisticsFragment"
@@ -63,5 +69,13 @@
             app:destination="@id/resultsFragment"
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/examResultDetailFragment"
+        android:name="com.example.examapp.View.ExamResultDetailFragment"
+        android:label="ExamResultDetailFragment" >
+        <argument
+            android:name="examResult"
+            app:argType="com.example.examapp.Model.Relations.ExamResultWithLectureResults" />
     </fragment>
 </navigation>

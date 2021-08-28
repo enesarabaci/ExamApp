@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class ExamResult(
     val examName: String,
     val elimination: Int,
+    val total: Double,
     @PrimaryKey(autoGenerate = false)
     val date: Long
 )

@@ -2,6 +2,7 @@ package com.example.examapp.View
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import com.example.examapp.Util.Util.snackbarBuilder
 import com.example.examapp.ViewModel.ExamViewModel
 import com.example.examapp.databinding.FragmentExamBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.Serializable
 
 @AndroidEntryPoint
 class ExamFragment : Fragment(R.layout.fragment_exam) {
@@ -140,7 +142,7 @@ class ExamFragment : Fragment(R.layout.fragment_exam) {
         val intent = Intent(requireContext(), ExamService::class.java)
         intent.apply {
             action = serviceAction
-            putExtra("exam", examList.get(currentExamIndex).exam)
+            putExtra("exam", examList.get(currentExamIndex).exam as Parcelable)
         }
         requireContext().startService(intent)
     }

@@ -2,6 +2,7 @@ package com.example.examapp.Model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "lectureTable")
 data class Lecture(
@@ -10,4 +11,4 @@ data class Lecture(
     val question: Int,
     @PrimaryKey(autoGenerate = false)
     val id: String = "$name$examName"
-)
+) : Serializable

@@ -12,7 +12,7 @@ class Exam(
     val examName: String,
     val duration: Long,
     val elimination: Int
-) : Parcelable {
+) : Parcelable, Serializable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readLong(),

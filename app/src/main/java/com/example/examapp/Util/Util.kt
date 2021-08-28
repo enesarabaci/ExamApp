@@ -3,6 +3,7 @@ package com.example.examapp.Util
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
 import android.view.View
 import android.widget.Toast
 import androidx.datastore.core.DataStore
@@ -12,8 +13,14 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.examapp.Model.Exam
 import com.example.examapp.Model.Relations.ExamWithLectures
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.first
+import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
 
 object Util {
@@ -102,6 +109,7 @@ object Util {
         total -= (falses%elimination).toDouble()/elimination
         return total
     }
+    fun Double.toTwoDecimal(): String = String.format("%.2f", this)
 
     val ELIMINATIONS = arrayOf<Int>(
         0,
@@ -111,10 +119,37 @@ object Util {
         4
     )
 
+    fun PieChart.prepare(dataSet: PieDataSet, vararg colors: Int = ColorTemplate.JOYFUL_COLORS) {
+        dataSet.apply {
+            sliceSpace = 3f
+            selectionShift = 5f
+            setColors(*colors)
+        }
+        val data = PieData(dataSet)
+        data.apply {
+            setValueTextSize(10f)
+            setValueTextColor(Color.BLACK)
+        }
+        setUsePercentValues(true)
+        description.isEnabled = false
+        setExtraOffsets(5f,5f,5f,5f)
+        dragDecelerationFrictionCoef = 0.95f
+        isDrawHoleEnabled = true
+        setHoleColor(Color.WHITE)
+        transparentCircleRadius = 60f
+        animateY(1000, Easing.EaseInOutCubic)
+        setData(data)
+    }
+
     enum class SERVICE_STATUS {
         SERVICE_CONTINUES,
         SERVICE_FINISHED,
         SERVICE_DOESNT_WORKING
+    }
+
+    enum class SORT_TYPES {
+        SORT_BY_DATE,
+        SORT_BY_TOTAL
     }
 
     const val NOTIFICATION_CHANNEL_ID = "exam_channel"

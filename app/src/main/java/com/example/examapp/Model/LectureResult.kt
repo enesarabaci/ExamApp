@@ -10,6 +10,7 @@ data class LectureResult(
     val question: Int,
     val trues: Int,
     val falses: Int,
+    val total: Double,
     @PrimaryKey(autoGenerate = false)
     val id: String = "$name$examResultDate"
 )

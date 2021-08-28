@@ -4,8 +4,10 @@ import com.example.examapp.Model.Exam
 import com.example.examapp.Model.ExamResult
 import com.example.examapp.Model.Lecture
 import com.example.examapp.Model.LectureResult
+import com.example.examapp.Model.Relations.ExamResultWithLectureResults
 import com.example.examapp.Model.Relations.ExamWithLectures
 import com.example.examapp.Room.Dao
+import com.example.examapp.Util.Util
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -25,6 +27,14 @@ class Repository @Inject constructor(
 
     override suspend fun insertExamResultWithLectureResults(examResult: ExamResult, lectureResults: List<LectureResult>) {
         dao.insertExamResultWithLectureResults(examResult, lectureResults)
+    }
+
+    override fun getExamResults(sortType: Util.SORT_TYPES, examName: String?): Flow<List<ExamResultWithLectureResults>> {
+        return dao.getExamResults(sortType, examName)
+    }
+
+    override suspend fun getExamResultWithLectures(): List<ExamResultWithLectureResults> {
+        return dao.getExamResultWithLectures()
     }
 
 }

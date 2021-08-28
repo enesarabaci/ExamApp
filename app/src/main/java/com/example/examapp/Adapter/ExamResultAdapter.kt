@@ -1,6 +1,5 @@
 package com.example.examapp.Adapter
 
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.examapp.Model.Lecture
 import com.example.examapp.R
 import com.example.examapp.Util.Util.makeTotal
-import com.google.android.material.textfield.TextInputEditText
+import com.example.examapp.Util.Util.toTwoDecimal
 import java.lang.Exception
 
 class ExamResultAdapter : RecyclerView.Adapter<ExamResultAdapter.ViewHolder>() {
@@ -46,7 +45,8 @@ class ExamResultAdapter : RecyclerView.Adapter<ExamResultAdapter.ViewHolder>() {
                 try {
                     val truesInt = text.toString().toInt()
                     val falsesInt = falses.text.toString().toInt()
-                    total.setText(makeTotal(truesInt, falsesInt, elimination).toString())
+                    val value = makeTotal(truesInt, falsesInt, elimination)
+                    total.setText(value.toTwoDecimal())
                 }catch (e: Exception) {
                     total.setText("")
                 }
@@ -56,7 +56,8 @@ class ExamResultAdapter : RecyclerView.Adapter<ExamResultAdapter.ViewHolder>() {
                 try {
                     val falsesInt = text.toString().toInt()
                     val truesInt = trues.text.toString().toInt()
-                    total.setText(makeTotal(truesInt, falsesInt, elimination).toString())
+                    val value = makeTotal(truesInt, falsesInt, elimination)
+                    total.setText(value.toTwoDecimal())
                 }catch (e: Exception) {
                     total.setText("")
                 }

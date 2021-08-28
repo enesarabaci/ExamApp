@@ -6,7 +6,6 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.MutableLiveData
 import com.example.examapp.Model.Exam
-import com.example.examapp.Model.Relations.ExamWithLectures
 import com.example.examapp.Util.Util
 import com.example.examapp.Util.Util.ACTION_FINISH_EXAM
 import com.example.examapp.Util.Util.ACTION_START_EXAM
@@ -34,6 +33,10 @@ class ExamService : LifecycleService() {
     }
 
     private fun startTimer() {
+        val time = examTime
+        val startedTime = System.currentTimeMillis()
+        var elapsedTime = 0L
+        timeInMillis.postValue(examTime-1000)
         CoroutineScope(Dispatchers.Main).launch {
             while (status.value != null && status.value == Util.SERVICE_STATUS.SERVICE_CONTINUES) {
                 delay(1000)
@@ -41,7 +44,8 @@ class ExamService : LifecycleService() {
                     finishExam()
                     break
                 }
-                examTime -= 1000L
+                elapsedTime = System.currentTimeMillis() - startedTime
+                examTime = time - elapsedTime
                 timeInMillis.postValue(examTime)
             }
         }
