@@ -3,10 +3,8 @@ package com.example.examapp.View
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -14,7 +12,6 @@ import com.example.examapp.R
 import com.example.examapp.Service.ExamService
 import com.example.examapp.Util.Util
 import com.example.examapp.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationBarView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +35,7 @@ class MainActivity : AppCompatActivity() {
                 else -> visibleBottomNav(true)
             }
         }
+
         binding.bottomNavView.apply {
             setupWithNavController(navController)
             setOnItemReselectedListener { /* No Operation.. */ }

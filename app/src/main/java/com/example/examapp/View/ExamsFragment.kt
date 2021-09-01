@@ -2,13 +2,11 @@ package com.example.examapp.View
 
 import android.os.Bundle
 import android.view.View
-import android.widget.GridLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.examapp.Adapter.ExamsAdapter
 import com.example.examapp.R
@@ -55,6 +53,9 @@ class ExamsFragment : Fragment(R.layout.fragment_exams) {
         binding.fragmentExamsRv.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = recyclerAdapter
+        }
+        recyclerAdapter.setOnExamClickListener { examWithLectures ->
+            findNavController().navigate(ExamsFragmentDirections.actionExamsFragmentToExamDetailFragment(examWithLectures))
         }
     }
 

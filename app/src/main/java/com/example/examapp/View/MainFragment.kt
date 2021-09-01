@@ -1,13 +1,11 @@
 package com.example.examapp.View
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.examapp.Model.ExamResult
 import com.example.examapp.Model.Relations.ExamResultWithLectureResults
 import com.example.examapp.R
 import com.example.examapp.Util.Util.prepare
@@ -43,6 +41,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             binding.fragmentMainExamWarning.isVisible = true
             return
         }else {
+            binding.fragmentMainExamsLayout.isVisible = true
             var trues = 0
             var falses = 0
             list.map { it.lectureResults }.forEach {
@@ -59,15 +58,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             binding.apply {
                 fragmentMainExamsLayout.isVisible = true
                 fragmentMainExamName1.setText(list.get(0).examResult.examName)
-                fragmentMainExamName2.setText(list.get(1).examResult.examName)
-                fragmentMainExamName3.setText(list.get(2).examResult.examName)
                 fragmentMainExamTotal1.setText("${list.get(0).examResult.total.toTwoDecimal()} Net")
-                fragmentMainExamTotal2.setText("${list.get(1).examResult.total.toTwoDecimal()} Net")
-                fragmentMainExamTotal3.setText("${list.get(2).examResult.total.toTwoDecimal()} Net")
+                if (list.size >= 2) {
+                    fragmentMainExamName2.setText(list.get(1).examResult.examName)
+                    fragmentMainExamTotal2.setText("${list.get(1).examResult.total.toTwoDecimal()} Net")
+                }
+                if (list.size >= 3) {
+                    fragmentMainExamName3.setText(list.get(2).examResult.examName)
+                    fragmentMainExamTotal3.setText("${list.get(2).examResult.total.toTwoDecimal()} Net")
+                }
                 fragmentMainExamCountTitle.setText("Şu ana kadar toplam ${list.size} sınava girdin.")
                 fragmentMainExamPc.prepare(
                     dataSet,
-                    ContextCompat.getColor(requireContext(), R.color.teal_200),
+                    ContextCompat.getColor(requireContext(), R.color.teal_500),
                     ContextCompat.getColor(requireContext(), R.color.light_red)
                 )
             }

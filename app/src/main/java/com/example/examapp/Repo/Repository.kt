@@ -37,4 +37,8 @@ class Repository @Inject constructor(
         return dao.getExamResultWithLectures()
     }
 
+    override fun getExamResultsWithName(examName: String): Flow<List<ExamResultWithLectureResults>> {
+        return dao.getExamResultsWithName(examName)
+    }
+
 }

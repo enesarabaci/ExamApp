@@ -30,16 +30,17 @@
             app:exitAnim="@anim/to_left" />
     </fragment>
     <fragment
-        android:id="@+id/statisticsFragment"
-        android:name="com.example.examapp.View.StatisticsFragment"
-        android:label="StatisticsFragment" />
-    <fragment
         android:id="@+id/examsFragment"
         android:name="com.example.examapp.View.ExamsFragment"
         android:label="ExamsFragment">
         <action
             android:id="@+id/action_examsFragment_to_createExamFragment"
             app:destination="@id/createExamFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_examsFragment_to_examDetailFragment"
+            app:destination="@id/examDetailFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left" />
     </fragment>
@@ -77,5 +78,13 @@
         <argument
             android:name="examResult"
             app:argType="com.example.examapp.Model.Relations.ExamResultWithLectureResults" />
+    </fragment>
+    <fragment
+        android:id="@+id/examDetailFragment"
+        android:name="com.example.examapp.View.ExamDetailFragment"
+        android:label="ExamDetailFragment" >
+        <argument
+            android:name="exam"
+            app:argType="com.example.examapp.Model.Relations.ExamWithLectures" />
     </fragment>
 </navigation>

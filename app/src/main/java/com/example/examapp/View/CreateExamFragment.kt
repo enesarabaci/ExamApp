@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,6 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -27,11 +25,9 @@ import com.example.examapp.Util.Util.ELIMINATIONS
 import com.example.examapp.Util.Util.alertDialogBuilder
 import com.example.examapp.Util.Util.makeMilliseconds
 import com.example.examapp.Util.Util.makeTime
-import com.example.examapp.Util.Util.makeTimeString
 import com.example.examapp.ViewModel.CreateExamViewModel
 import com.example.examapp.databinding.FragmentCreateExamBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class CreateExamFragment : Fragment(R.layout.fragment_create_exam) {
@@ -71,7 +67,9 @@ class CreateExamFragment : Fragment(R.layout.fragment_create_exam) {
 
     private fun collectData() {
         viewModel.createdLectures.observe(viewLifecycleOwner) {
-            recyclerAdapter.list = it.toList()
+            val list = arrayListOf<Lecture>()
+            list.addAll(it)
+            recyclerAdapter.list = list
             binding.fragmentCreateExamRv.setHasFixedSize(true)
         }
         viewModel.finish.observe(viewLifecycleOwner) {

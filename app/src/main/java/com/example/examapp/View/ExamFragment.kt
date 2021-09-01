@@ -1,5 +1,7 @@
 package com.example.examapp.View
 
+import android.app.NotificationManager
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
@@ -14,14 +16,13 @@ import com.example.examapp.Service.ExamService
 import com.example.examapp.Util.Util
 import com.example.examapp.Util.Util.ACTION_FINISH_EXAM
 import com.example.examapp.Util.Util.ACTION_START_EXAM
+import com.example.examapp.Util.Util.RESULT_NOTIFICATION_ID
 import com.example.examapp.Util.Util.alertDialogBuilder
 import com.example.examapp.Util.Util.makeQuestionsText
 import com.example.examapp.Util.Util.makeTimeString
-import com.example.examapp.Util.Util.snackbarBuilder
 import com.example.examapp.ViewModel.ExamViewModel
 import com.example.examapp.databinding.FragmentExamBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.Serializable
 
 @AndroidEntryPoint
 class ExamFragment : Fragment(R.layout.fragment_exam) {
@@ -118,6 +119,9 @@ class ExamFragment : Fragment(R.layout.fragment_exam) {
                         }, { /* Dismiss */
                             binding.fragmentExamTime.setText(makeTimeString(examList.get(currentExamIndex).exam.duration))
                         })
+
+                        val notificationManager = requireContext().getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                        notificationManager.cancel(RESULT_NOTIFICATION_ID)
                     }
                 }
             }

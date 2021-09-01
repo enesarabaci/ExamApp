@@ -8,14 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.examapp.Model.Exam
 import com.example.examapp.Model.Lecture
 import com.example.examapp.Repo.RepositoryInterface
-import com.example.examapp.Util.Util.makeMilliseconds
 import com.example.examapp.Util.Util.makeTimeString
 import com.example.examapp.Util.Util.snackbarBuilder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,7 +36,7 @@ class CreateExamViewModel @Inject constructor(
         val lecture = Lecture(lectureName, "", lectureQuestions)
         _createdLectures.value?.apply {
             add(lecture)
-            _createdLectures.postValue(this)
+            _createdLectures.value = this
         }
     }
 

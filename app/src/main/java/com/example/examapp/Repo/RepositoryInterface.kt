@@ -25,4 +25,6 @@ interface RepositoryInterface {
 
     suspend fun getExamResultWithLectures(): List<ExamResultWithLectureResults>
 
+    fun getExamResultsWithName(examName: String): Flow<List<ExamResultWithLectureResults>>
+
 }

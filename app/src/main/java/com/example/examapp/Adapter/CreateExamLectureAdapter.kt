@@ -29,7 +29,6 @@ class CreateExamLectureAdapter : RecyclerView.Adapter<CreateExamLectureAdapter.V
         override fun areContentsTheSame(oldItem: Lecture, newItem: Lecture): Boolean {
             return oldItem == newItem
         }
-
     }
     private val recyclerListDiffer = AsyncListDiffer<Lecture>(this, diffUtil)
     var list: List<Lecture>

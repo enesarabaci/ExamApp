@@ -1,10 +1,7 @@
 package com.example.examapp.DependencyInjection
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.examapp.Adapter.ExamsAdapter
 import com.example.examapp.Repo.Repository
 import com.example.examapp.Repo.RepositoryInterface
@@ -15,7 +12,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import java.util.prefs.Preferences
 import javax.inject.Singleton
 
 @Module

@@ -8,19 +8,18 @@
         android:id="@+id/row_table_lecture"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:background="@color/grey"
+        android:background="?attr/rootBackgroundColor"
         android:gravity="center"
         android:maxLength="15"
         android:padding="5dp"
-        android:text="(30) Matematik"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/row_table_trues"
         android:layout_weight="1"
+        android:background="?attr/themeColor"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="21"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -30,7 +29,6 @@
         android:background="@color/light_red"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="7"
         android:textColor="@color/light_grey"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -38,9 +36,9 @@
     <TextView
         android:id="@+id/row_table_total"
         android:layout_weight="1"
+        android:background="?attr/themeColor"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="18.66"
         android:textSize="16sp"
         android:textStyle="bold" />
 

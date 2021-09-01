@@ -76,7 +76,8 @@ class ResultsFragment : Fragment(R.layout.fragment_results) {
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, exams.toArray())
         binding.fragmentResultActv.setAdapter(arrayAdapter)
         binding.fragmentResultActv.setOnItemClickListener { adapterView, view, position, l ->
-            val name = if (position == exams.toArray().size-1) null else exams.toList().get(position)
+            val selection = exams.toList().get(position)
+            val name = if (selection == "Hepsi") null else selection
             viewModel.updateExamName(name)
         }
     }

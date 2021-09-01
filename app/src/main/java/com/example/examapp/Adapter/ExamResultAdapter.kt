@@ -39,7 +39,7 @@ class ExamResultAdapter : RecyclerView.Adapter<ExamResultAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ExamResultAdapter.ViewHolder, position: Int) {
         val currentLecture = list.get(position)
         holder.apply {
-            lectureName.setText("${currentLecture.name}")
+            lectureName.setText("(${currentLecture.question}) ${currentLecture.name}")
             trues.doOnTextChanged { text, start, before, count ->
                 onTruesTextListener?.invoke(position, text.toString())
                 try {

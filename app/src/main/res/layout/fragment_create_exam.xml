@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey">
+    android:background="?attr/rootBackgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="15dp"
-                    android:elevation="4dp"
                     app:cardCornerRadius="7dp">
 
                     <LinearLayout
@@ -44,7 +43,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:text="Sınav Adı"
-                            android:textColor="@color/dark"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -74,7 +72,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="10dp"
-                    android:elevation="4dp"
                     app:cardCornerRadius="7dp">
 
                     <LinearLayout
@@ -94,7 +91,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
                                 android:text="Sınav Süresi"
-                                android:textColor="@color/dark"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -117,7 +113,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Eliminasyon"
-                                android:textColor="@color/dark"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -147,7 +142,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="10dp"
-                    android:elevation="4dp"
                     app:cardCornerRadius="7dp">
 
                     <LinearLayout
@@ -161,14 +155,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:text="Dersler"
-                            android:textColor="@color/dark"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/fragment_create_exam_rv"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="175dp"
                             android:layout_marginVertical="10dp" />
 
                     </LinearLayout>

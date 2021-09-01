@@ -6,40 +6,22 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.view.View
 import android.widget.Toast
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import com.example.examapp.Model.Exam
+import androidx.core.content.ContextCompat
 import com.example.examapp.Model.Relations.ExamWithLectures
+import com.example.examapp.R
 import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.first
-import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
 
 object Util {
-
-    /*
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "userName")
-    private val dataStoreKey = stringPreferencesKey("name")
-
-    suspend fun getUserName(context: Context) : String? {
-        val preferences = context.dataStore.data.first()
-        return preferences.get(dataStoreKey)
-    }
-
-    suspend fun writeUserName(context: Context, userName: String) {
-        context.dataStore.edit { settings ->
-            settings[dataStoreKey] = userName
-        }
-    }
-    */
     
     fun alertDialogBuilder(context: Context, title: String, message: String, yes: (() -> Unit), no: (() -> Unit)? = null, dismiss: (() -> Unit)? = null) {
         val builder = AlertDialog.Builder(context)
@@ -105,8 +87,12 @@ object Util {
 
     fun makeTotal(trues: Int, falses: Int, elimination: Int): Double {
         var total = 0.0
-        total = trues - (falses/elimination).toDouble()
-        total -= (falses%elimination).toDouble()/elimination
+        if (elimination != 0) {
+            total = trues - (falses/elimination).toDouble()
+            total -= (falses%elimination).toDouble()/elimination
+        }else {
+            total = trues.toDouble()
+        }
         return total
     }
     fun Double.toTwoDecimal(): String = String.format("%.2f", this)
@@ -135,10 +121,31 @@ object Util {
         setExtraOffsets(5f,5f,5f,5f)
         dragDecelerationFrictionCoef = 0.95f
         isDrawHoleEnabled = true
-        setHoleColor(Color.WHITE)
+        setHoleColor(Color.TRANSPARENT)
+        legend.textColor = ContextCompat.getColor(context, R.color.teal_700)
         transparentCircleRadius = 60f
         animateY(1000, Easing.EaseInOutCubic)
         setData(data)
+    }
+
+    fun LineChart.prepare(dataSet: LineDataSet) {
+        isDragEnabled = true
+        setScaleEnabled(false)
+        dataSet.apply {
+            fillAlpha = 110
+            setColor(ContextCompat.getColor(context, R.color.teal_500))
+            lineWidth = 3f
+            valueTextSize = 10f
+        }
+        val dataSets: ArrayList<ILineDataSet> = arrayListOf(dataSet)
+        val lineData = LineData(dataSets)
+        legend.textColor = ContextCompat.getColor(context, R.color.teal_700)
+        xAxis.textColor = Color.TRANSPARENT
+        axisLeft.textColor = ContextCompat.getColor(context, R.color.teal_700)
+        axisRight.textColor = ContextCompat.getColor(context, R.color.teal_700)
+        dataSet.valueTextColor = ContextCompat.getColor(context, R.color.teal_700)
+        data = lineData
+        invalidate()
     }
 
     enum class SERVICE_STATUS {
@@ -155,9 +162,11 @@ object Util {
     const val NOTIFICATION_CHANNEL_ID = "exam_channel"
     const val NOTIFICATION_CHANNEL_NAME = "Exam"
     const val NOTIFICATION_ID = 1
+    const val RESULT_NOTIFICATION_ID = 2
 
     const val ACTION_START_EXAM = "ACTION_START_EXAM"
     const val ACTION_FINISH_EXAM = "FINISH_EXAM"
+    const val ACTION_CANCEL_EXAM = "ACTION_CANCEL_EXAM"
 
     const val ACTION_SHOW_EXAM_FRAGMENT = "ACTION_SHOW_EXAM_FRAGMENT"
 

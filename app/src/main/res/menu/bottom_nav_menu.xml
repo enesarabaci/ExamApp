@@ -17,9 +17,5 @@
         android:id="@+id/resultsFragment"
         android:icon="@drawable/results"
         android:title="Sonuçlar" />
-    <item
-        android:id="@+id/statisticsFragment"
-        android:icon="@drawable/statistics"
-        android:title="İstatistikler" />
 
 </menu>

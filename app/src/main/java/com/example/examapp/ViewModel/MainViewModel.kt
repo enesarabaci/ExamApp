@@ -1,7 +1,6 @@
 package com.example.examapp.ViewModel
 
 import androidx.lifecycle.*
-import com.example.examapp.Model.ExamResult
 import com.example.examapp.Model.Relations.ExamResultWithLectureResults
 import com.example.examapp.Repo.RepositoryInterface
 import dagger.hilt.android.lifecycle.HiltViewModel

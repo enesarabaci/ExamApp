@@ -68,7 +68,7 @@ interface Dao {
     @Query("SELECT * FROM examResultTable ORDER BY total DESC")
     fun getExamResultsSortByTotal(): Flow<List<ExamResultWithLectureResults>>
 
-    @Query("SELECT * FROM examResultTable WHERE examName = :examName ORDER BY date DESC")
+    @Query("SELECT * FROM examResultTable WHERE examName = :examName ORDER BY date ASC")
     fun getExamResultsWithName(examName: String): Flow<List<ExamResultWithLectureResults>>
 
     @Query("SELECT * FROM examResultTable ORDER BY date DESC")

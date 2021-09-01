@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -14,6 +15,8 @@ import com.example.examapp.R
 import com.example.examapp.Util.Util.makeTimeString
 
 class ExamsAdapter(private val context: Context) : RecyclerView.Adapter<ExamsAdapter.ViewHolder>() {
+
+    private var onExamClickListener: ((ExamWithLectures) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -43,6 +46,10 @@ class ExamsAdapter(private val context: Context) : RecyclerView.Adapter<ExamsAda
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
+    fun setOnExamClickListener(listener: (ExamWithLectures) -> Unit) {
+        onExamClickListener = listener
+    }
+
     override fun onBindViewHolder(holder: ExamsAdapter.ViewHolder, position: Int) {
         val currentExam = list.get(position)
         holder.apply {
@@ -61,7 +68,9 @@ class ExamsAdapter(private val context: Context) : RecyclerView.Adapter<ExamsAda
                 lectures.append("${it.name} (${it.question})")
             }
             examLectures.setText(lectures.toString())
-
+            examInfo.setOnClickListener {
+                onExamClickListener?.invoke(currentExam)
+            }
         }
     }
 
@@ -70,12 +79,14 @@ class ExamsAdapter(private val context: Context) : RecyclerView.Adapter<ExamsAda
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var examInfo: ImageButton
         var examName: TextView
         var examTime: TextView
         var examElimination: TextView
         var examQuestions: TextView
         var examLectures: TextView
         init {
+            examInfo = view.findViewById(R.id.row_exam_info)
             examName = view.findViewById(R.id.row_exam_name)
             examTime = view.findViewById(R.id.row_exam_time)
             examElimination = view.findViewById(R.id.row_exam_elimination)

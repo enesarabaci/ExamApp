@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.examapp.R
 import com.example.examapp.Util.Util.toastBuilder
