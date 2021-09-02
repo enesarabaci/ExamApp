@@ -1,6 +1,6 @@
 # Exam
 
-Bu projemde özellikle sınav döneminde olan öğrencilerin girmiş olduğu sınavların sonuçlarını kaydederek sınavlarındaki ve derslerindeki gelişimlerini gözlemleyebilecekleri bir uygulama geliştirdim </br></br>
+Bu projemde özellikle sınav döneminde olan öğrencilerin girmiş olduğu sınavların sonuçlarını kaydederek sınavlarındaki ve derslerindeki gelişimlerini gözlemleyebilecekleri bir uygulama geliştirdim. </br></br>
 Bu uygulama ile sınavlar oluşturulabilir, sonuçlar filtrelenerek net dağılımı grafiği ile birlikte gözlemlenebilir, canlı sınav girişi ile süre takibi yapılabilir ve her bir sınav için net gelişim grafikleri gözlemlenebilir. 
 
 # Uygulamada Kullanılan Kütüphane ve Yapılar
@@ -13,7 +13,7 @@ Bu uygulama ile sınavlar oluşturulabilir, sonuçlar filtrelenerek net dağıl�
 -**Navigation** </br>
 -Animasyonlar için **Lottie** kütüphanesi </br>
 -Grafikler için **MPAndroidChart** kütüphanesi </br>
--Arka plan işlemleri için **LifecycleService**
+-Sınav süresi takibi için **ForegroundService**
 
 # Uygulama Görselleri
 
